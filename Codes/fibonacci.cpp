@@ -3,6 +3,20 @@
 
 using namespace std;
 
+string format_with_commas(long num)
+{
+    string num_str = to_string(num);
+    int insertPosition = num_str.length() - 3;
+
+    while (insertPosition > 0)
+    {
+        num_str.insert(insertPosition, ",");
+        insertPosition -= 3;
+    }
+
+    return num_str;
+}
+
 int fibonacci_naive(int n)
 {
     return n;
@@ -10,19 +24,20 @@ int fibonacci_naive(int n)
 
 int fibonacci_recursive(int n)
 {
-    if (n == 0 || n == 1)
+    if (n <= 1)
     {
         return n;
     }
     else
     {
-        return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
+        return n;
+        // return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
     }
 }
 
-int fibonacci_dp(int n)
+string fibonacci_dp(int n)
 {
-    int F[n + 1];
+    long F[n + 1];
     F[0] = 0;
     F[1] = 1;
 
@@ -30,11 +45,13 @@ int fibonacci_dp(int n)
     {
         F[i] = F[i - 1] + F[i - 2];
     }
-    return F[n];
+
+    return format_with_commas(F[n]);
 }
 
 void solve(int number)
 {
+
     auto start = chrono::high_resolution_clock::now();
     cout << fibonacci_recursive(number) << "\n";
     auto end = chrono::high_resolution_clock::now();
@@ -59,7 +76,8 @@ void solve(int number)
 
 int main(int argc, char **argv)
 {
-    solve(46);
+    system("cls");
+    solve(20);
 
     return 0;
 }
