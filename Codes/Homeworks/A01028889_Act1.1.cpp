@@ -27,7 +27,7 @@ FUCNIONES MERGE SORT |
 ----------------------
 */
 
-void Merge(double part_list_numbers[], double aux_list[], int low, int mid, int high)
+void Merge(double part_list_numbers[], double aux_list[], int low, int mid, int high) // complejidad O(n)
 {
     // Copiar los elementos del arreglo original al arreglo auxiliar
     for (int k = low; k <= high; k++)
@@ -64,7 +64,7 @@ void Merge(double part_list_numbers[], double aux_list[], int low, int mid, int 
     }
 }
 
-void Sort(double list_numbers[], double aux_list[], int low, int high)
+void Sort(double list_numbers[], double aux_list[], int low, int high) // Complejidad O(n log n)
 {
 
     if (high <= low)
@@ -84,7 +84,7 @@ void Sort(double list_numbers[], double aux_list[], int low, int high)
 FUCNIONES QUICK SORT |
 ----------------------
 */
-int Partition(double part_list_numbers[], int low, int high)
+int Partition(double part_list_numbers[], int low, int high) // Complejidad O(n)
 {
     int left_index = low;
     int right_index = high + 1;
@@ -119,7 +119,7 @@ int Partition(double part_list_numbers[], int low, int high)
     return right_index; // Devolver el índice del pivote
 }
 
-void Quick_sort(double list_numbers[], int low, int high)
+void Quick_sort(double list_numbers[], int low, int high) // Complejidad O(n log n) # peor de los casos O(n^2)
 {
     if (high <= low)
     {
@@ -138,44 +138,47 @@ void Quick_sort(double list_numbers[], int low, int high)
 FUCNIONES MAIN       |
 ----------------------
 */
-void Show(double list_numbers[], int size)
+void Show(double list_numbers[], int size) // Complejidad O(n)
 {
+    cout << "[";
     for (int i = 0; i < size; i++)
     {
-        cout << list_numbers[i] << " -> ";
+        cout << list_numbers[i] << ", ";
     }
-    cout << list_numbers[size] << endl
+    cout << list_numbers[size] << "]" << endl
          << endl;
 }
 
-void Solution()
+void Create_merge_sort_list(int index)
 {
     // Crear un tamaño random para la primera lista
-    srand((unsigned)time(NULL));
+
     int size = 10 + rand() % 11; // Tamaño random del 10 - 20
 
-    double list_numbers[size];
+    double merge_sort_list_numbers1[size];
     for (int i = 0; i < size; i++)
     {
         // Agregamos num random del 0.01 - 100.00 en cada posición de list_numbers
-        list_numbers[i] = (double)(1 + rand() % 10000) / 100;
+        merge_sort_list_numbers1[i] = (double)(1 + rand() % 10000) / 100;
     }
     // Mostrar arreglo antes de ser ordenador
-    cout << "Original Array" << endl
+    cout << "Original Array " << index << endl
          << endl;
-    Show(list_numbers, size - 1);
+    Show(merge_sort_list_numbers1, size - 1);
 
     double aux_list[size]; // Creamos el arreglo auxiliar
     // Aplicamos Algoritmo Merge Sort al Arreglo
-    Sort(list_numbers, aux_list, 0, size - 1);
+    Sort(merge_sort_list_numbers1, aux_list, 0, size - 1);
 
     // Mostramos arreglo ya ordenado de mayor a menor
-    cout << "Merge Sort Array" << endl
+    cout << "Merge Sort Array " << index << endl
          << endl;
-    Show(list_numbers, size - 1);
+    Show(merge_sort_list_numbers1, size - 1);
+}
 
-    // Crear un tamaño random para la segunda lista
-    size = 10 + rand() % 11;
+void Create_quick_sort_array(int index)
+{
+    int size = 10 + rand() % 11;
 
     double second_list_numbers[size];
     for (int i = 0; i < size; i++)
@@ -184,7 +187,7 @@ void Solution()
     }
 
     // Mostrar arreglo antes de ser ordenador
-    cout << "Original Array" << endl
+    cout << "Original Array " << index << endl
          << endl;
     Show(second_list_numbers, size - 1);
 
@@ -193,9 +196,23 @@ void Solution()
 
     // Mostramos arreglo ya ordenado de mayor a menor
     cout << endl
-         << "Quick Sort Array" << endl
+         << "Quick Sort Array " << index << endl
          << endl;
     Show(second_list_numbers, size - 1);
+}
+
+void Solution()
+{
+    int number_of_tests = 4;
+    srand((unsigned)time(NULL));
+    for (int i = 0; i < number_of_tests; i++)
+    {
+        Create_merge_sort_list(i + 1);
+    }
+    for (int i = 0; i < number_of_tests; i++)
+    {
+        Create_quick_sort_array(i + 1);
+    }
 }
 
 int main()
