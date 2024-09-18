@@ -42,6 +42,8 @@ void Show(int list_numbers[], int denominations[], int size) // Complejidad O(n)
     }
 }
 
+// Best case complexity O(n),
+// or O(n*k) where n is the change needed and k is the num_of_domination
 void Dynamic_Programming(int denominations[], int num_of_domination, int change)
 {
     if (change == 0)
@@ -78,7 +80,6 @@ void Dynamic_Programming(int denominations[], int num_of_domination, int change)
     }
 
     int amount = change;
-    int num_transaction = 0;
     int coin_count[num_of_domination] = {0}; // Array to store the count of each coin used
 
     // Reconstruct the solution
@@ -93,13 +94,14 @@ void Dynamic_Programming(int denominations[], int num_of_domination, int change)
     Show(coin_count, denominations, num_of_domination);
 }
 
+// Complexity O(n)
 void Greedy(int denominations[], int change)
 {
     int coins[change];
     int num_transaction = 0;
     while (change > 0)
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (change >= denominations[i])
             {
@@ -130,7 +132,7 @@ void Solution(int denomitations[], int num_cases)
         cout << "Case " << current_case + 1 << " change " << to_evaluate_num_list[current_case] << ":" << endl;
         cout << "Dynamic Programming Solution:" << endl;
         // Dynamic Programming will send number of coins used to get to solution
-        Dynamic_Programming(denomitations, 3, to_evaluate_num_list[current_case]);
+        Dynamic_Programming(denomitations, 6, to_evaluate_num_list[current_case]);
         cout
             << "Greedy Solution: " << endl;
 
@@ -144,8 +146,8 @@ int main()
     system("cls"); // Borrar contenido de terminal
     srand((unsigned)time(NULL));
 
-    int denominations[] = {25, 20, 1}; // value of coins
-    int num_cases = 4;                 // number of cases to test
+    int denominations[] = {50, 25, 20, 10, 5, 1}; // value of coins
+    int num_cases = 4;                            // number of cases to test
 
     Solution(denominations, num_cases);
     return 0;
