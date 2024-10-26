@@ -60,7 +60,7 @@ void Greedy(int denominations[], int change)
     Show(coins, num_transaction - 1);
 }
 
-void Solution(int denomitations[], int num_cases)
+void Solution(int denominations[], int num_cases)
 {
     int to_evaluate_num_list[num_cases]; // array where the prices are going to be stored
 
@@ -76,11 +76,11 @@ void Solution(int denomitations[], int num_cases)
     {
         cout << "Case " << current_case + 1 << " change " << to_evaluate_num_list[current_case] << ":" << endl;
         cout << "Dinamic Programming Solution:" << endl;
-        // Dynamic_Programming(denomitations, to_evaluate_num_list[current_case]);
+        // Dynamic_Programming(denominations, to_evaluate_num_list[current_case]);
         cout
             << "Greedy Solution: " << endl;
 
-        Greedy(denomitations, to_evaluate_num_list[current_case]);
+        Greedy(denominations, to_evaluate_num_list[current_case]);
     }
 }
 
