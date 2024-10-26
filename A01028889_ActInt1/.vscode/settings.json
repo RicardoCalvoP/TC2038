@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
+    "*.css": "css",
+    "iostream": "cpp",
+    "fstream": "cpp",
+    "iosfwd": "cpp",
+    "initializer_list": "cpp"
+  }
+}
