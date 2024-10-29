@@ -1,142 +1,145 @@
 
-# Proyecto: Análisis de Archivos de Transmisión y Códigos Maliciosos
+# Project: Transmission File and Malicious Code Analysis
 
-**Nombre del Estudiante:** Ricardo Alfredo Calvo Pérez
-**Matrícula:** A01028889
-**Fecha:** 28/10/2024
+**Student Name:** Ricardo Alfredo Calvo Pérez
+**Student ID:** A01028889
+**Date:** 10/28/2024
 
-## Descripción del Problema
+## Problem Description
 
-Este proyecto tiene como objetivo desarrollar un programa en C++ que lea cinco archivos de texto fijos, los cuales contienen datos de transmisiones y códigos maliciosos, y determine si los códigos maliciosos están contenidos en las transmisiones. Además, el programa debe identificar patrones espejeados (palíndromos) y calcular la subsecuencia común más larga entre dos transmisiones.
+This project aims to develop a C++ program that reads five fixed text files containing data on transmissions and malicious code. The program will determine if the malicious code is contained within the transmission data. Additionally, it will identify mirrored patterns (palindromes) and calculate the longest common substring between two transmissions.
 
-### Archivos involucrados:
+### Involved Files
 
-1. **Archivos de Transmisión:**
+1. **Transmission Files:**
    - `transmission1.txt`
    - `transmission2.txt`
 
-2. **Archivos de Códigos Maliciosos:**
+2. **Malicious Code Files:**
    - `mcode1.txt`
    - `mcode2.txt`
    - `mcode3.txt`
 
-### Descripción de los Archivos:
+### File Descriptions
 
-- Los archivos **transmissionX.txt** contienen secuencias de caracteres que representan datos de transmisiones de un dispositivo a otro.
-- Los archivos **mcodeX.txt** contienen secuencias de códigos maliciosos que deben ser buscados dentro de las transmisiones.
+- The **transmissionX.txt** files contain character sequences representing transmission data between devices.
+- The **mcodeX.txt** files contain sequences of malicious code that need to be searched within the transmission files.
 
-## Objetivos del Programa
+## Program Objectives
 
-### Parte 1: Detección de Códigos Maliciosos
+### Part 1: Malicious Code Detection
 
-El programa debe analizar si el contenido de los archivos `mcode1.txt`, `mcode2.txt`, y `mcode3.txt` está contenido en los archivos `transmission1.txt` y `transmission2.txt`. El resultado debe ser `true` o `false` si la secuencia de caracteres de los archivos `mcodeX.txt` está contenida en las transmisiones, seguido de la posición en la que empieza.
+The program should analyze whether the contents of `mcode1.txt`, `mcode2.txt`, and `mcode3.txt` are found within `transmission1.txt` and `transmission2.txt`. The result should indicate `true` or `false` depending on whether the character sequence from each `mcodeX.txt` file is contained in the transmission, along with the starting position.
 
-**Formato de salida:**
+**Output Format:**
 
 ```
-(true | false) posición_inicial
+(true | false) starting_position
 ```
 
-Ejemplo:
+**Example:**
+
+For `mcode1.txt` containing `A12B34` and `transmission1.txt` containing `ABCDEFGFEDCBA12345`:
 
 ```
 true 4
 false
 ```
 
-### Parte 2: Detección de Palíndromos
+### Part 2: Palindrome Detection
 
-El programa debe buscar si hay códigos espejeados (palíndromos) dentro de los archivos de transmisión. Para cada archivo de transmisión, el programa debe mostrar la posición inicial y final (iniciando desde 1) donde se encuentra el palíndromo más largo.
+The program should search for mirrored patterns (palindromes) within the transmission files. For each transmission file, it should display the starting and ending positions (starting from 1) of the longest palindrome found.
 
-**Formato de salida:**
-
-```
-posición_inicial posición_final
-```
-
-Ejemplo:
+**Output Format:**
 
 ```
-4 9
+starting_position ending_position
 ```
 
-### Parte 3: Substring Común Más Largo
+**Example:**
 
-El programa debe analizar cuán similares son los archivos de transmisión `transmission1.txt` y `transmission2.txt`. Se debe mostrar la posición inicial y final (iniciando desde 1) de la subsecuencia común más larga entre ambos archivos de transmisión.
-
-**Formato de salida:**
+For `transmission1.txt` containing `ABCDEFGFEDCBA12345`:
 
 ```
-posición_inicial posición_final
+1 13
 ```
 
-Ejemplo:
+### Part 3: Longest Common Substring Detection
+
+The program should compare the transmission files `transmission1.txt` and `transmission2.txt` to find the longest common substring. It should display the starting and ending positions (starting from 1) of the longest common substring between the two transmission files.
+
+**Output Format:**
 
 ```
-3 8
+starting_position ending_position
+```
+
+**Example:**
+
+For `transmission1.txt` containing `ABCDEFGFEDCBA12345` and `transmission2.txt` containing `DEF123456789ABC123321DEF`:
+
+```
+14 18
 ```
 
 ## Input
 
-- No hay input por parte del usuario. Los archivos deben existir en la misma carpeta donde se ejecuta el programa.
+- There is no user input. The required files should be located in the same directory as the program.
 
 ## Output
 
-### Parte 1:
-Debe mostrar si los archivos `transmission1.txt` y `transmission2.txt` contienen los códigos de `mcode1.txt`, `mcode2.txt`, y `mcode3.txt`, junto con la posición inicial de cada código en la transmisión.
+### Part 1:
+Displays whether each transmission file contains the codes from `mcode1.txt`, `mcode2.txt`, and `mcode3.txt`, along with the starting position for each code within the transmission.
 
-### Parte 2:
-Debe mostrar la posición inicial y final del código espejeado (palíndromo) más largo dentro de los archivos de transmisión.
+### Part 2:
+Displays the starting and ending positions of the longest palindrome within each transmission file.
 
-### Parte 3:
-Debe mostrar la posición inicial y final de la subsecuencia común más larga entre los dos archivos de transmisión.
+### Part 3:
+Displays the starting and ending positions of the longest common substring between the two transmission files.
 
-## Ejemplos
+## Examples
 
-### Ejemplo 1 - Parte 1
+### Example 1 - Part 1
 
-**Archivos:**
+**Files:**
 
 - `mcode1.txt`: `A12B34`
-- `transmission1.txt`: `123A12B34C567`
+- `transmission1.txt`: `ABCDEFGFEDCBA12345`
 
-**Salida:**
-
-```
-true 4
-```
-
-### Ejemplo 2 - Parte 2
-
-**Archivo:**
-
-- `transmission1.txt`: `123ABCCBA456`
-
-**Salida:**
+**Output:**
 
 ```
-4 9
+true 13
 ```
 
-### Ejemplo 3 - Parte 3
+### Example 2 - Part 2
 
-**Archivos:**
+**File:**
 
-- `transmission1.txt`: `ABCDEF123`
-- `transmission2.txt`: `XYZDEF123`
+- `transmission1.txt`: `ABCDEFGFEDCBA12345`
 
-**Salida:**
+**Output:**
 
 ```
-4 9
+1 13
+```
+
+### Example 3 - Part 3
+
+**Files:**
+
+- `transmission1.txt`: `ABCDEFGFEDCBA12345`
+- `transmission2.txt`: `DEF123456789ABC123321DEF`
+
+**Output:**
+
+```
+4 6
 ```
 
 ---
 
-## Notas:
+## Notes
 
-- Asegúrate de que los archivos de texto estén en la misma carpeta donde se ejecuta el programa.
-- Los índices deben comenzar en 1, no en 0.
-- Usa este template para completar con tus propios datos.
-
----
+- Ensure the text files are located in the same directory as the program.
+- This README was created by ChatGPT for spelling, formatting, and clarity and reviewed by student.

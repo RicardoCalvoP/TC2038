@@ -1,6 +1,7 @@
 #include "filesFunctions.h"
 #include "step1.h"
 #include "step2.h"
+#include "step3.h"
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -71,6 +72,11 @@ int main()
           << endl;
      cout << "Step 3: Find Substring in Transmission Files" << endl;
      cout << "--------------------------------------------------------" << endl;
+
+     string str1 = "ABCDEFGFEDCBA12345";
+     string str2 = "XYZDEF123456789ABC123XYZZYX321DEF";
+
+     string result = find_longest_common_substring(str1, str2);
 
      return 0;
 }

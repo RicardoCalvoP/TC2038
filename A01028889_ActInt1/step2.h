@@ -1,3 +1,7 @@
+// Ricardo Alfredo Calvo Pérez - A01028889
+// This code finds the longest palindromic substring in a given string using Manacher's Algorithm.
+// It preprocesses the string to handle palindromes, then expands around each character
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -55,5 +59,5 @@ void find_inner_palindrome(const string &transmission_content)
   int palindrome_length = max_palindrome_length;
 
   cout << "Longest palindrome: " << transmission_content.substr(start_position, palindrome_length)
-       << " at position " << start_position << " : " << start_position + palindrome_length - 1 << endl;
+       << " at position " << start_position + 1 << " : " << start_position + palindrome_length << endl;
 }

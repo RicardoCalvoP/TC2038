@@ -1,3 +1,6 @@
+// Ricardo Alfredo Calvo Pérez - A01028889
+// Check if any line in the malicious code file (mcode_file) appears as a substring
+
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -24,7 +27,7 @@ bool compare_mcode_files(ifstream &transmission_file, ifstream &mcode_file)
         relative_position++;
         if (relative_position == mcode_length)
         {
-          cout << "True in position: " << position << " with: " << mcode_current_string << endl;
+          cout << "True in position: " << position + 1 << " with: " << mcode_current_string << endl;
           return true;
         }
       }
