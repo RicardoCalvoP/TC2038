@@ -21,19 +21,26 @@ void read_Adjacency_List(vector<vector<int>> adjacency_list)
 
 vector<vector<int>> readGraph(string file)
 {
-  int nodes, edges, type;
+  int nodes, edges;
   vector<vector<int>> adjacency_list;
   ifstream myFile(file);
   if (myFile.is_open())
   {
-    myFile >> nodes >> edges >> type;
+
+    myFile >> nodes >> edges;
+
     adjacency_list.resize(nodes);
+
     for (int i = 0; i < edges; i++)
     {
-      int u, v;
-      myFile >> u >> v;
-      adjacency_list[u - 1].push_back(v - 1);
-      adjacency_list[v - 1].push_back(u - 1);
+      // u = source vertex
+      // v = destination vertex
+      // w = weight
+      int u, v, w;
+      myFile >> u >> v >> w;
+      adjacency_list[u - 1].push_back(w);
+      cout << "adjacency_list version " << i << endl;
+      read_Adjacency_List(adjacency_list);
     }
   }
   else
@@ -95,7 +102,9 @@ void BFS(vector<vector<int>> graph, int start)
 
 int main()
 {
-  vector<vector<int>> adjacency_list = readGraph("../grafo.txt");
+  system("cls"); // Borrar contenido de terminal
+
+  vector<vector<int>> adjacency_list = readGraph("../../grafo.txt");
   read_Adjacency_List(adjacency_list);
 
   cout << "DFS" << endl;
