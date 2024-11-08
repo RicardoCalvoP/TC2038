@@ -1,3 +1,10 @@
+/*
+Ricardo Alfredo Calvo Perez
+07/11/2024
+
+Floyd Warshall & Dijkstar Algorithm
+*/
+
 #include <iostream>
 #include <vector>
 #include "floyd_warshall.h"
@@ -13,6 +20,17 @@ MAIN
 int main()
 {
   system("cls"); // Clear terminal output
+
+  /*
+  ** INTRSUCTIONS **
+
+  Use any of the graphs in the Graph examples folder or create your own with the following format
+
+  line 1 -> [number of nodes ] [number of edges]
+  line 2-e -> [origin node] [destination node] [cost]
+
+  Remeber this is for weighted directed graph only
+  */
   string graph = "../Graph_examples/grafo6.txt";
 
   vector<vector<int>>

@@ -1,3 +1,10 @@
+/*
+Ricardo Alfredo Calvo Perez
+07/11/2024
+
+Dijkstar Algorithm
+*/
+
 #include <iostream>
 #include <vector>
 #include <fstream>
