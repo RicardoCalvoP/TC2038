@@ -4,6 +4,10 @@
         ".prettierrc": "json",
         "*.css": "css",
         "chrono": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "ostream": "cpp",
+        "bitset": "cpp",
+        "algorithm": "cpp",
+        "iosfwd": "cpp"
     }
 }
