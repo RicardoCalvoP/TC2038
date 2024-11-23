@@ -1,7 +1,7 @@
 """
 Ricardo Alfredo Calvo Pérez - A01028889
 
-Functions for graphs
+Functions for graphs given by file
 """
 
 

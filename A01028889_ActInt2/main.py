@@ -10,11 +10,7 @@ from read_graph import read_graph_from_file
 from functions import  print_graph, save_graph_to_file, visualize_graph
 
 
-def random_version():
-    # Ask for numbers of nodes
-    num_nodes = int(input("Set number of nodes: "))
-    graph, nodes = create_graph(num_nodes)
-
+def extraFunctions(graph, nodes):
     choice = input("Do you need to print adjacency matrix? [y] yes , [n] no: ")
     if choice.lower() == "y":
         print_graph(graph, nodes)
@@ -40,10 +36,12 @@ while True:
     if choice == "1":
         file = input("What file you want to open? ej. Graph_4_nodes.txt:\n")
         nodes, graph = read_graph_from_file(file)
-        print_graph(graph, nodes)
+        extraFunctions(graph, nodes)
         break
     elif choice == "2":
-        random_version()
+        num_nodes = int(input("Set number of nodes: "))
+        graph, nodes = create_graph(num_nodes)
+        extraFunctions(graph, nodes)
         break
     else:
         print("Invalid option")
