@@ -1,25 +1,23 @@
 """
 Ricardo Alfredo Calvo Pérez - A01028889
 
-Functions for graphs given by file
+Functions to read graphs from files and create adjacency matrices.
 """
-
 
 import os
 from functions import generate_node_names
 
-
 def read_graph_from_file(file):
     """
-    Reads a graph from a file and converts it into an adjacency matrix.
+    Read a graph from a file and convert it into an adjacency matrix.
 
     Args:
         file (str): Name of the file (e.g., 'Graph_4_nodes.txt').
 
     Returns:
-        tuple: A tuple containing:
-            - nodes (list): List of node names (e.g., ["A", "B", "C"]).
-            - graph (list): Adjacency matrix as a 2D list.
+        tuple:
+            - nodes (list): List of node names.
+            - graph (list): Adjacency matrix.
     """
     folder = "Graphs"
     filepath = os.path.join(folder, file)
@@ -30,17 +28,13 @@ def read_graph_from_file(file):
 
     try:
         with open(filepath, "r") as file_obj:
-            # Read the first line (number of nodes and edges)
-            num_nodes, num_edges = map(int, file_obj.readline().strip().split())
-
-            # Generate unique node names and initialize adjacency matrix
+            num_nodes, _ = map(int, file_obj.readline().strip().split())
             nodes = generate_node_names(num_nodes)
             graph = [[-1 for _ in range(num_nodes)] for _ in range(num_nodes)]
 
-            # Fill the adjacency matrix with data from the file
             for line in file_obj:
                 origin, destination, weight = map(int, line.strip().split())
-                graph[origin - 1][destination - 1] = weight  # Convert 1-indexed to 0-indexed
+                graph[origin - 1][destination - 1] = weight
 
             return nodes, graph
 

@@ -1,20 +1,30 @@
 """
-Ricardo Alfredo Calvo Perez - A01028889
+Ricardo Alfredo Calvo Pérez - A01028889
 23/11/2024
 
-Functions used for graphs functions
+Helper functions for graph operations:
+- Generate node names
+- Print adjacency matrix
+- Save graphs to a file
+- Visualize graphs
 """
 
 import string
 import os
 import networkx as nx
 import matplotlib.pyplot as plt
-
 from cable_problem import cable_problem
 
-
 def generate_node_names(num_nodes):
+    """
+    Generate unique node names (e.g., A, B, ..., AA, AB, ...).
 
+    Args:
+        num_nodes (int): Number of nodes.
+
+    Returns:
+        list: List of node names.
+    """
     names = []
     alphabet = string.ascii_uppercase
     while len(names) < num_nodes:
@@ -29,14 +39,25 @@ def generate_node_names(num_nodes):
     return names
 
 def print_graph(graph, nodes):
+    """
+    Print the adjacency matrix of a graph.
 
-    print("      " + " ".join(f"{node:<{3}}" for node in nodes))
-
+    Args:
+        graph (list): Adjacency matrix.
+        nodes (list): List of node names.
+    """
+    print("      " + " ".join(f"{node:<3}" for node in nodes))
     for i, row in enumerate(graph):
-        print(f"{nodes[i]:<{3}} " + " ".join(f"{val:>{3}}" for val in row))
-
+        print(f"{nodes[i]:<3} " + " ".join(f"{val:>3}" for val in row))
 
 def save_graph_to_file(graph, nodes):
+    """
+    Save the graph as a text file.
+
+    Args:
+        graph (list): Adjacency matrix.
+        nodes (list): List of node names.
+    """
     edges = []
     num_nodes = len(nodes)
     directory = "Graphs"
@@ -50,69 +71,83 @@ def save_graph_to_file(graph, nodes):
 
     with open(filename, "w") as f:
         f.write(f"{num_nodes} {len(edges)}\n")
-
         for edge in edges:
             f.write(f"{edge[0]} {edge[1]} {edge[2]}\n")
 
-    print(f"Graph saved correctly at  {filename}.")
-
+    print(f"Graph saved at {filename}.")
 
 def visualize_graph(graph, nodes):
     """
-    Visualiza un grafo dirigido utilizando NetworkX y Matplotlib.
+    Visualize a directed graph using NetworkX and Matplotlib.
 
     Args:
-        graph (list): Matriz de adyacencia.
-        nodes (list): Lista de nombres de los nodos.
+        graph (list): Adjacency matrix.
+        nodes (list): List of node names.
     """
-    # Crear un grafo dirigido
     G = nx.DiGraph()
 
-    # Agregar nodos y aristas dirigidas al grafo
     for i in range(len(nodes)):
         for j in range(len(nodes)):
-            if graph[i][j] != -1 and graph[i][j] != 0:  # Excluir -1 y autoconexiones
+            if graph[i][j] != -1 and graph[i][j] != 0:
                 G.add_edge(nodes[i], nodes[j], weight=graph[i][j])
 
-    # Posiciones para los nodos
-    pos = nx.spring_layout(G)  # Diseño de nodos
-
-    # Dibujar los nodos y las flechas (aristas dirigidas)
-    nx.draw_networkx_nodes(G, pos, node_color="lightblue", node_size=700)
-    nx.draw_networkx_labels(
-        G, pos, labels={node: node for node in nodes}, font_weight="bold")
-    nx.draw_networkx_edges(G, pos, arrowstyle="->",
-                           arrowsize=20, connectionstyle="arc3,rad=0.2")
-
-    # Agregar etiquetas de los pesos de las aristas
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, node_color="lightblue", font_weight="bold")
     edge_labels = nx.get_edge_attributes(G, "weight")
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-
-    # Título y mostrar el grafo
-    plt.title("Visualización del Grafo Dirigido")
+    plt.title("Graph Visualization")
     plt.show()
 
+
+"""
+Helper functions for user interaction and displaying results for the cable problem.
+"""
+
 def extraFunctions(graph, nodes):
+    """
+    Provides additional functionalities for user interaction:
+    - Print the adjacency matrix of the graph.
+    - Save the graph to a file.
+    - Visualize the graph as a directed graph.
+
+    Args:
+        graph (list): Adjacency matrix of the graph.
+        nodes (list): List of node names.
+    """
     choice = input("Do you need to print adjacency matrix? [y] yes , [n] no: ")
     if choice.lower() == "y":
-        print_graph(graph, nodes)
+        print_graph(graph, nodes)  # Print the graph's adjacency matrix
+
     choice = input("Do you need to save the graph into a file? [y] yes , [n] no: ")
     if choice.lower() == "y":
-        save_graph_to_file(graph, nodes)
+        save_graph_to_file(graph, nodes)  # Save the graph to a text file
+
     choice = input("Do you need to see the graph? [y] yes , [n] no: ")
     if choice.lower() == "y":
-        visualize_graph(graph, nodes)
+        visualize_graph(graph, nodes)  # Visualize the graph
 
 
 def print_cable_problem(graph, nodes):
-    print(
-            "\n=================================================="
-            "\n|                Cable Problem                   |"
-            "\n=================================================="
-            )
-    mst, total_cost = cable_problem(graph, nodes)
+    """
+    Solves and prints the results of the cable problem (MST).
+    - Uses Prim's Algorithm to compute the Minimum Spanning Tree (MST).
+    - Displays the edges in the MST with their weights.
+    - Displays the total cost of the MST.
 
+    Args:
+        graph (list): Adjacency matrix of the graph.
+        nodes (list): List of node names.
+    """
+    print(
+        "\n=================================================="
+        "\n|                Cable Problem                   |"
+        "\n=================================================="
+    )
+    mst, total_cost = cable_problem(graph, nodes)  # Solve the MST problem
+
+    # Print the edges of the MST
     for edge in mst:
         print(f"{nodes[edge[0]]} → {nodes[edge[1]]} (Weight: {edge[2]})")
 
+    # Print the total cost of the MST
     print("Total cost →", total_cost)

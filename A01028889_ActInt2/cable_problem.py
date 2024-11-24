@@ -2,26 +2,22 @@
 Ricardo Alfredo Calvo Pérez - A01028889
 23/11/2024
 
-Prim's Algorithm to get the cheapest path to set cable
-to connect all nodes
+Prim's Algorithm to solve the cable problem.
 
-    Finds the Minimum Spanning Tree (MST) for an undirected graph using Prim's algorithm.
+This module calculates the Minimum Spanning Tree (MST) for an undirected graph
+using Prim's algorithm. It identifies the cheapest way to connect all nodes
+with cables.
 
-    Args:
-        graph (list of list of int): Adjacency matrix representing the graph.
-
-    Returns:
-        tuple:
-            - mst_edges (list): List of edges in the MST as (node1, node2, weight).
-            - total_cost (int): Total cost of the MST.
-
+Returns:
+    - mst_edges (list): List of edges in the MST as (node1, node2, weight).
+    - total_cost (int): Total cost of the MST.
 """
 
 import heapq
 
 def cable_problem(graph, nodes):
     """
-    Prim's Algorithm to calculate the Minimum Spanning Tree (MST) for a graph.
+    Solve the cable problem using Prim's Algorithm.
 
     Args:
         graph (list of list of int): Adjacency matrix representing the graph.
@@ -29,32 +25,32 @@ def cable_problem(graph, nodes):
 
     Returns:
         tuple:
-            - mst (list): List of edges in the MST as (parent_node, current_node, weight).
+            - mst_edges (list): List of edges in the MST as (parent_node, current_node, weight).
             - total_cost (int): Total cost of the MST.
     """
-    visited = [False] * len(nodes)  # List of length of number of nodes to track visited nodes
-    mst = []  # Store the edges of the MST
-    total_cost = 0  # Total cost of the MST
-    priority_queue = [(0, 0, -1)]  # Start from node 0 with weight 0 and no parent
+    visited = [False] * len(nodes)  # Track visited nodes
+    mst = []  # Store the edges in the MST
+    total_cost = 0  # Accumulate the total cost of the MST
+    priority_queue = [(0, 0, -1)]  # (weight, current_node, parent_node)
 
     while priority_queue:
         weight, current_node, parent_node = heapq.heappop(priority_queue)
 
-        # Skip if the node is already visited
+        # Skip if node has already been visited
         if visited[current_node]:
             continue
 
-        # Mark the current node as visited
+        # Mark the node as visited and update total cost
         visited[current_node] = True
-        total_cost += weight  # Add the weight to the total cost
+        total_cost += weight
 
-        # Add the edge to the MST if it's not the starting node
+        # Add edge to MST if valid (ignore root node edge)
         if parent_node != -1:
             mst.append((parent_node, current_node, weight))
 
-        # Add all unvisited neighbors of the current node to the priority queue
+        # Add neighbors of the current node to the queue
         for neighbor, edge_weight in enumerate(graph[current_node]):
-            if edge_weight != -1 and not visited[neighbor]:
+            if edge_weight != -1 and not visited[neighbor]:  # Valid edge
                 heapq.heappush(priority_queue, (edge_weight, neighbor, current_node))
 
     return mst, total_cost
