@@ -10,6 +10,8 @@ import os
 import networkx as nx
 import matplotlib.pyplot as plt
 
+from cable_problem import cable_problem
+
 
 def generate_node_names(num_nodes):
 
@@ -89,3 +91,28 @@ def visualize_graph(graph, nodes):
     # Título y mostrar el grafo
     plt.title("Visualización del Grafo Dirigido")
     plt.show()
+
+def extraFunctions(graph, nodes):
+    choice = input("Do you need to print adjacency matrix? [y] yes , [n] no: ")
+    if choice.lower() == "y":
+        print_graph(graph, nodes)
+    choice = input("Do you need to save the graph into a file? [y] yes , [n] no: ")
+    if choice.lower() == "y":
+        save_graph_to_file(graph, nodes)
+    choice = input("Do you need to see the graph? [y] yes , [n] no: ")
+    if choice.lower() == "y":
+        visualize_graph(graph, nodes)
+
+
+def print_cable_problem(graph, nodes):
+    print(
+            "\n=================================================="
+            "\n|                Cable Problem                   |"
+            "\n=================================================="
+            )
+    mst, total_cost = cable_problem(graph, nodes)
+
+    for edge in mst:
+        print(f"{nodes[edge[0]]} → {nodes[edge[1]]} (Weight: {edge[2]})")
+
+    print("Total cost →", total_cost)
