@@ -14,6 +14,7 @@ import os
 import networkx as nx
 import matplotlib.pyplot as plt
 from cable_problem import cable_problem
+from traveler_problem import travelers_problem
 
 def generate_node_names(num_nodes):
     """
@@ -103,7 +104,7 @@ def visualize_graph(graph, nodes):
 Helper functions for user interaction and displaying results for the cable problem.
 """
 
-def extraFunctions(graph, nodes):
+def extraFunctions(graph, nodes, version):
     """
     Provides additional functionalities for user interaction:
     - Print the adjacency matrix of the graph.
@@ -114,13 +115,10 @@ def extraFunctions(graph, nodes):
         graph (list): Adjacency matrix of the graph.
         nodes (list): List of node names.
     """
-    choice = input("Do you need to print adjacency matrix? [y] yes , [n] no: ")
-    if choice.lower() == "y":
-        print_graph(graph, nodes)  # Print the graph's adjacency matrix
-
-    choice = input("Do you need to save the graph into a file? [y] yes , [n] no: ")
-    if choice.lower() == "y":
-        save_graph_to_file(graph, nodes)  # Save the graph to a text file
+    if version == "2":
+        choice = input("Do you need to save the graph into a file? [y] yes , [n] no: ")
+        if choice.lower() == "y":
+            save_graph_to_file(graph, nodes)  # Save the graph to a text file
 
     choice = input("Do you need to see the graph? [y] yes , [n] no: ")
     if choice.lower() == "y":
@@ -151,3 +149,17 @@ def print_cable_problem(graph, nodes):
 
     # Print the total cost of the MST
     print("Total cost →", total_cost)
+
+
+def print_travelers_problem(graph, nodes):
+
+    print(
+        "\n=================================================="
+        "\n|              Traveler's Problem                |"
+        "\n=================================================="
+    )
+
+    path , total_cost = travelers_problem(graph, nodes)
+    for edge in path:
+        print(f"{edge[0]} → {edge[1]} (Cost: {edge[2]} km)")
+    print(f"Total Cost: {total_cost} km")  # Print the total cost

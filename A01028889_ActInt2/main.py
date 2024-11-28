@@ -10,7 +10,7 @@ Main program to solve graph problems:
 
 from create_graph import create_graph
 from read_graph import read_graph_from_file
-from functions import print_cable_problem, extraFunctions
+from functions import print_cable_problem,print_travelers_problem, print_graph,extraFunctions
 
 # Main program loop
 while True:
@@ -19,14 +19,22 @@ while True:
     if choice == "1":
         file = input("Enter the filename (e.g., Graph_4_nodes.txt):\n")
         nodes, graph = read_graph_from_file(file)
-        extraFunctions(graph, nodes)
+        print("\nAdjacency matrix\n")
+        print_graph(graph, nodes)  # Print the graph's adjacency matrix
         print_cable_problem(graph, nodes)
+        print_travelers_problem(graph,nodes)
+        extraFunctions(graph, nodes, choice)
         break
     elif choice == "2":
         num_nodes = int(input("Enter the number of nodes: "))
         graph, nodes = create_graph(num_nodes)
-        extraFunctions(graph, nodes)
+
+        print("\nAdjacency matrix\n")
+        print_graph(graph, nodes)  # Print the graph's adjacency matrix
+
         print_cable_problem(graph, nodes)
+        print_travelers_problem(graph,nodes)
+        extraFunctions(graph, nodes, choice)
         break
     else:
         print("Invalid option. Try again.")
